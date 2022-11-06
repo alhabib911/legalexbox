@@ -52,3 +52,12 @@ a {
 .ourServicesBG{
   background: transparent linear-gradient(180deg,#0c1126 0%,#0C11267C 42%,#0C112600 100%) 0% 0% no-repeat padding-box;
 }
+.ninethSectionGradient{
+  background: transparent
+  linear-gradient(67deg, rgba(18, 29, 48, 0) 0%, #0f1f36 62%, #606874 100%) 0%
+  0% no-repeat padding-box;
+}
+.googleFooter{
+  background: transparent linear-gradient(180deg,#0c1126 0%,#0C11267C 42%,#0C112600 100%) 0% 0% no-repeat padding-box;
+  border-radius: 12px;
+}

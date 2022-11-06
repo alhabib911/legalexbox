@@ -1,10 +1,12 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import Banner from '../component/Banner/Banner'
+import EighthSection from '../component/EighthSection/EighthSection'
 import FifthSection from '../component/FifthSection/FifthSection'
 import FirstSection from '../component/FirstSection/FirstSection'
+import Footer from '../component/Footer/Footer'
 import FourthSection from '../component/FourthSection/FourthSection'
 import Navbar from '../component/Navbar/Navbar'
+import NinethSection from '../component/NinethSection/NinethSection'
 import SecondSection from '../component/SecondSection/SecondSection'
 import SeventhSection from '../component/SeventhSection.js/SeventhSection'
 import SixthSection from '../component/SixthSection/SixthSection'
@@ -29,6 +31,9 @@ export default function Home() {
         <FifthSection/>
         <SixthSection/>
         <SeventhSection/>
+        <EighthSection/>
+        <NinethSection/>
+        <Footer/>
       </div>
     </div>
   )

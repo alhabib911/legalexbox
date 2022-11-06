@@ -3,24 +3,21 @@ import React from 'react';
 
 const Navbar = () => {
     return (
-        <div className='flex justify-between items-center mx-20 py-6'>
-            <div>
-                <h1 className='text-white text-4xl'>legalexbox</h1>
-            </div>
-            <div>
-                <div className='flex text-white gap-12 text-lg font-semibold '>
-                    <Link href={"/about"}>Service</Link>
-                    <Link href={"/about"}>Service</Link>
-                    <Link href={"/about"}>Service</Link>
+            <div className='grid grid-cols-3 items-center text-white lg:mx-28 md:mx-10 mx-5 lg:py-5 md:py-2'>
+                <div>
+                    <h1 className=' lg:text-5xl md:text-4xl text-xl w-1/2'><span className='font-bold'>legalex</span><span className='font-normal'>box</span></h1>
+                </div>
+                <div className='flex gap-12 lg:visible invisible'>
+                    <Link href={"/about"}>About Us</Link>
+                    <Link href={"/service"}>Service</Link>
+                    <Link href={"/contact"}>Contact</Link>
+                </div>
+                <div>
+                    <Link href={"/login"}>
+                        <h3 className='text-right'>Client Login</h3>
+                    </Link>
                 </div>
             </div>
-            <div className='flex text-white items-center gap-10'>
-                <Link href={"/login"}>
-                <h3 className='text-lg font-medium'>Client Login</h3>
-                </Link>
-                <h3 className='text-lg font-medium bg-[#375E93] px-8 py-3 rounded-md'>Let's Get Started</h3>
-            </div>
-        </div>
     );
 };
 
