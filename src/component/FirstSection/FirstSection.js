@@ -2,7 +2,7 @@ import React from 'react';
 
 const FirstSection = () => {
     return (
-        <div className='mx-36 flex justify-between pt-5'>
+        <div className='lg:px-36 md:px-10 px-5 grid lg:grid-cols-4 md:grid-cols-4 grid-cols-2 pt-5'>
             <div className='flex items-center gap-5'>
                 <img src="/icon-web.png.webp" alt="" />
                 <h3 className='text-xl text-gray-400 cursor-pointer hover:text-blue-500'>Website Design</h3>

@@ -4,9 +4,9 @@ import { AiFillStar } from 'react-icons/ai';
 const SeventhSection = () => {
     return (
         <div>
-            <div className='flex justify-between gap-20 mx-28 pt-32'>
-                <div className='w-2/6'>
-                    <h1 className='text-[38px] text-white font-semibold'>Over 5,800 Lawyers <br /> Trust Our Services</h1>
+            <div className='flex lg:flex-row flex-col justify-between gap-20 lg:mx-28 md:mx-16 mx-8 lg:pt-32 md:pt-16 pt-10'>
+                <div className='lg:w-2/6 w-full'>
+                    <h1 className='lg:text-[38px] md:text-3xl text-2xl text-white font-semibold'>Over 5,800 Lawyers <br /> Trust Our Services</h1>
                     <div className='grid grid-cols-3 gap-5 pt-8'>
                         <img src="./img-client-tierney-1.png.webp" alt="" />
                         <img src="./img-client-hm.png.webp" alt="" />
@@ -16,8 +16,8 @@ const SeventhSection = () => {
                         <img src="./img-client-thomas.png.webp" alt="" />
                     </div>
                 </div>
-                <div className='w-2/3 flex gap-10'>
-                    <div className='ourServicesBG w-1/2 px-5 py-5 rounded-md mt-24'>
+                <div className='lg:w-2/3 w-full flex lg:flex-row md:flex-row flex-col gap-10'>
+                    <div className='ourServicesBG lg:w-1/2 md:w-1/2 w-full px-5 py-5 rounded-md mt-24'>
                         <div className='text-[#E6C850] text-[25px] flex'>
                             <AiFillStar />
                             <AiFillStar />
@@ -37,7 +37,7 @@ const SeventhSection = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='ourServicesBG w-1/2 px-5 py-5 rounded-md'>
+                    <div className='ourServicesBG lg:w-1/2 md:w-1/2 w-full   px-5 py-5 rounded-md'>
                         <div className='text-[#E6C850] text-[25px] flex'>
                             <AiFillStar />
                             <AiFillStar />
@@ -59,8 +59,8 @@ const SeventhSection = () => {
                     </div>
                 </div>
             </div>
-            <div className='pt-8 flex justify-center'>
-                <button className="bg-[#4E89E1] mt-16 rounded-md px-12 py-3 text-white font-semibold">
+            <div className='flex justify-center'>
+                <button className="bg-[#4E89E1] lg:mt-16 md:mt-8 mt-5 rounded-md px-12 lg:py-3 py-2 text-white font-semibold">
                     READ MORE TESTIMONIALS
                 </button>
             </div>

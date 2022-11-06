@@ -2,11 +2,11 @@ import React from 'react';
 
 const FourthSection = () => {
     return (
-        <div className='pt-28'>
-            <h1 className='text-4xl text-white text-center'>What Makes Us Different</h1>
-            <h1 className='text-4xl text-white text-center'>From Everyone Else?</h1>
-            <div className='grid grid-cols-4 gap-5 mx-28 pt-16'>
-                <div className=''>
+        <div className='lg:pt-28 pt-16'>
+            <h1 className='lg:text-4xl md:text-2xl text-xl text-white text-center'>What Makes Us Different</h1>
+            <h1 className='lg:text-4xl md:text-2xl text-xl text-white text-center'>From Everyone Else?</h1>
+            <div className='grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-5 lg:mx-28 md:mx-16 mx-8  lg:pt-16 md:pt-8 pt-5'>
+                <div>
                     <h3 className='text-xl font-semibold text-white'>Niche Experience.</h3>
                     <p className='pt-3 text-gray-400'>Established in 2001, Law Firm Sites has only worked with lawyers. We understand the unique needs of the legal industry in design and marketing.</p>
                 </div>
