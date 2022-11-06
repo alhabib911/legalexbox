@@ -45,7 +45,7 @@ const SeventhSection = () => {
                         <AiFillStar />
                     </div>
                     <h3 className='text-xl text-gray-200 font-bold pt-3'>Above and Beyond</h3>
-                    <p className='text-lg pt-4 text-gray-400'>" I have been in legal marketing for over 10 years and honestly, this is the best website agency I have ever worked with and is so reasonably priced too. Jo Stephens is tremendous and skillful, and fun to work with on top of it. Epitomizes “above and beyond” in service."</p>
+                    <p className='text-lg pt-4 text-gray-400'>" I have been in legal marketing for over 10 years and honestly, this is the best website agency I have ever with and is so reasonably priced too. Jo Stephens is tremendous and skillful, and fun . Epitomizes “above and beyond” in service."</p>
                     <div className='flex items-center gap-5'>
                         <div>
                             <img class="inline-block h-12 w-12 rounded-full " src="img-client-lourdes.png.webp" alt="img-testimonial-woman-min.webp" />
