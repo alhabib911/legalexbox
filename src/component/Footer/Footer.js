@@ -6,7 +6,7 @@ const Footer = () => {
     return (
         <div className='mx-24 pt-24 flex gap-20'>
             <div className='w-2/4'>
-                <h1 className='text-white text-4xl font-semibold'>legalexbox</h1>
+            <h1 className='text-white text-4xl'><span className='font-bold'>legalex</span><span className='font-normal'>box</span></h1>
                 <p className='text-lg pt-5 text-gray-400'>At <span className='font-semibold'>Law Firm Sites</span>, we are dedicated to helping you get more cases through stunning website design and SEO.</p>
                 <div className='flex items-center whitespace-nowrap mt-8 gap-8 googleFooter px-8 py-8'>
                     <div>
