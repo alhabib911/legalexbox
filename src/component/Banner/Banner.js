@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 const Banner = () => {
@@ -17,9 +18,9 @@ const Banner = () => {
                     <span className='text-white'>, we are dedicated to helping you get more cases through stunning website design and SEO.</span>
                 </p>
                 <div className='flex justify-center'>
-                    <button  className='bg-[#4E89E1] lg:mt-16 mt-8 rounded-md px-8 lg:py-3 py-2 text-white font-semibold'>
+                    <Link href={"/contacts"} className='bg-[#4E89E1] lg:mt-16 mt-8 rounded-md px-8 lg:py-3 py-2 text-white font-semibold'>
                         LET'S GO
-                    </button>
+                    </Link>
                 </div>
             </div>
             <div className='lg:w-3/5 w-full lg:mx-0 px-9 lg:pt-16 pt-8 flex justify-center'>

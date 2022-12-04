@@ -2,11 +2,15 @@ import Link from 'next/link';
 import React from 'react';
 import Footer from '../component/Footer/Footer';
 import { FcGoogle } from 'react-icons/fc';
+import Navbar from '../component/Navbar/Navbar';
 
 const login = () => {
     return (
         <div className='bg-[#0E1F33]'>
-            <div className='pt-16'></div>
+            
+            <div className='pb-16'>
+            <Navbar/>
+            </div>
             <div className='bg-white mx-80 rounded'>
                 <div className='flex items-center justify-center text-xl gap-2 font-semibold pt-10 pb-4'>
                     <div className='border flex items-center gap-2 py-2 px-24 rounded-md hover:bg-[#0E1F33] hover:text-white hover:cursor-pointer'>

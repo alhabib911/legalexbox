@@ -1,12 +1,13 @@
 import React from 'react';
 import { FaFacebookF, FaLinkedinIn } from 'react-icons/fa';
 import { BsTwitter } from 'react-icons/bs';
+import Link from 'next/link';
 
 const Footer = () => {
     return (
         <div className='lg:mx-24 md:mx-16 mx-8 lg:pt-24 md:pt-16 pt-8 flex lg:flex-row flex-col lg:gap-20'>
             <div className='lg:w-2/4 w-full'>
-                <h1 className='text-white lg:text-4xl text-3xl lg:text-left text-center'><span className='font-bold'>legalex</span><span className='font-normal'>box</span></h1>
+                <Link className='text-white lg:text-4xl text-3xl lg:text-left text-center' href={"/"}><span className='font-bold'>legalex</span><span className='font-normal'>box</span></Link>
                 <p className='text-lg pt-5 text-gray-400 lg:text-left text-center'>At <span className='font-semibold'>Law Firm Sites</span>, we are dedicated to helping you get more cases through stunning website design and SEO.</p>
                 <div className='flex lg:flex-row md:flex-row flex-col items-center whitespace-nowrap mt-8 gap-8 googleFooter px-8 lg:py-8 py-4'>
                     <div>

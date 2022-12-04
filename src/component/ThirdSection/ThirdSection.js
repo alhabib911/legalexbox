@@ -11,9 +11,9 @@ const ThirdSection = () => {
                 <p className="pt-8 text-gray-500 text-lg w-11/12 font-semibold">Our SEO experts work tirelessly to get you the results you’re hoping for. If you don’t see what you like, you don’t pay.</p>
                 <h3 className="text-xl font-semibold text-white pt-10">What We Offer</h3>
                 <p className="pt-5 text-lg text-gray-500">On-page SEO, Off-page SEO, Directory Listings, Social media Posting, Monthly SEO Reports, Dedicated SEO Manager, Local SEO, Content Marketing.</p>
-                <button className="bg-[#4E89E1] lg:mt-16 md:mt-8 mt-5 rounded-md px-12 lg:py-3 py-2 text-white font-semibold">
+                {/* <button className="bg-[#4E89E1] lg:mt-16 md:mt-8 mt-5 rounded-md px-12 lg:py-3 py-2 text-white font-semibold">
                     LEARN MORE
-                </button>
+                </button> */}
             </div>
         </div>
     );
