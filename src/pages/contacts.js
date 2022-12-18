@@ -8,13 +8,13 @@ const contacts = () => {
     return (
         <div className='bg-[#03142D]'>
             <Navbar />
-            <div className='flex justify-between mx-32 pt-10'>
-                <div className='text-white w-1/2'>
-                    <h1 className='text-5xl font-semibold'>Get a Better Site.</h1>
-                    <h1 className='text-5xl text-[#98DBF9] font-bold'>Get Better Cases.</h1>
+            <div className='lg:flex justify-between lg:mx-32 md:mx-20 mx-10 pt-10'>
+                <div className='text-white lg:w-1/2 w-full'>
+                    <h1 className='lg:text-5xl text-3xl font-semibold'>Get a Better Site.</h1>
+                    <h1 className='lg:text-5xl text-3xl text-[#98DBF9] font-bold'>Get Better Cases.</h1>
                     <h6 className='text-2xl pt-5'>This is going to be good.</h6>
-                    <div className='my-10 w-4/5 bg-[#152841] px-16 py-8 rounded-lg'>
-                        <div className='flex items-center text-3xl gap-4 font-semibold'>
+                    <div className='my-10 lg:w-4/5 w-full bg-[#152841] lg:px-16 px-6 py-8 rounded-lg'>
+                        <div className='flex lg:items-center items-end lg:text-3xl text-2xl gap-4 font-semibold'>
                             <h1 className='text-[#98DBF9]'><FaQuoteLeft /></h1>
                             <h2>Above and Beyond</h2>
                         </div>
@@ -30,33 +30,33 @@ const contacts = () => {
                         </div>
                     </div>
                 </div>
-                <div className='bg-[#F6FCFF] w-1/2 pl-16 pt-8 rounded-lg'>
+                <div className='bg-[#F6FCFF] lg:w-1/2 lg:pl-16 md:pl-10 pl-5 pt-8 rounded-lg'>
                     <p className='text-xl pt-5'>indicates required fields</p>
                     <p className='text-xl pt-5'>Please note that your information is saved on our server as you enter it.</p>
                     <div className='pt-8'>
-                        <label className='font-semibold text-xl' htmlFor="">Name <span className='text-red-600'>*</span></label> <br />
-                        <input className='w-11/12 mr-10 py-2 mt-2 border-gray-700 border rounded-lg' type="text" name="name" id="" /> <br /> <br />
-                        <label className='font-semibold text-xl' htmlFor="">Firm Name <span className='text-red-600'>*</span></label> <br />
-                        <input className='w-11/12 mr-10 py-2 mt-2 border-gray-700 border rounded-lg' type="text" name="name" id="" /> <br /> <br />
-                        <label className='font-semibold text-xl' htmlFor="">Email Address <span className='text-red-600'>*</span></label> <br />
-                        <input className='w-11/12 mr-10 py-2 mt-2 border-gray-700 border rounded-lg' type="text" name="name" id="" /> <br /> <br />
-                        <label className='font-semibold text-xl' htmlFor="">Phone Number <span className='text-red-600'>*</span></label> <br />
-                        <input className='w-11/12 mr-10 py-2 mt-2 border-gray-700 border rounded-lg' type="text" name="name" id="" /> <br /> <br />
-                        <input className='bg-[#3B65A0] py-2 px-8 mb-10 text-white font-semibold rounded-md' type="submit" value="Let's Go" />
+                        <label className='font-semibold lg:text-xl md:text-xl text-lg' htmlFor="">Name <span className='text-red-600'>*</span></label> <br />
+                        <input className='w-11/12 mr-10 lg:py-2 md:py-2 py-1 mt-2 border-gray-700 border rounded-lg' type="text" name="name" id="" /> <br /> <br />
+                        <label className='font-semibold lg:text-xl md:text-xl text-lg' htmlFor="">Firm Name <span className='text-red-600'>*</span></label> <br />
+                        <input className='w-11/12 mr-10 lg:py-2 md:py-2 py-1 mt-2 border-gray-700 border rounded-lg' type="text" name="name" id="" /> <br /> <br />
+                        <label className='font-semibold lg:text-xl md:text-xl text-lg' htmlFor="">Email Address <span className='text-red-600'>*</span></label> <br />
+                        <input className='w-11/12 mr-10 lg:py-2 md:py-2 py-1 mt-2 border-gray-700 border rounded-lg' type="text" name="name" id="" /> <br /> <br />
+                        <label className='font-semibold lg:text-xl md:text-xl text-lg' htmlFor="">Phone Number <span className='text-red-600'>*</span></label> <br />
+                        <input className='w-11/12 mr-10 lg:py-2 md:py-2 py-1 mt-2 border-gray-700 border rounded-lg' type="text" name="name" id="" /> <br /> <br />
+                        <input className='bg-[#3B65A0] lg:py-2 md:py-2 py-1 px-8 mb-10 text-white font-semibold rounded-md' type="submit" value="Let's Go" />
 
                     </div>
                 </div>
             </div>
 
-            <div className='mx-32 flex gap-20 pt-16'>
-                <div className='text-white'>
-                    <h1 className=' text-8xl'><CiLocationOn /></h1>
-                    <h2 className='text-white text-5xl pt-6'>Visit us at</h2>
+            <div className='mx-32 lg:flex gap-20 pt-16'>
+                <div className='text-white whitespace-nowrap'>
+                    <h1 className=' lg:text-5xl md:text-5xl text-5xl'><CiLocationOn /></h1>
+                    <h2 className='text-white lg:text-5xl md:text-3xl text-xl lg:pt-6'>Visit us at</h2>
                     <p>765 E 340 S Suite #105</p>
                     <p>American Fork, UT 84003</p>
                 </div>
                 <div>
-                    <img className='rounded-lg' src="/Location.png" alt="" />
+                    <img className='rounded-lg lg:visible hidden' src="/Location.png" alt="" />
                 </div>
             </div>
             <Footer />

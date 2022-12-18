@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 import { AiFillStar } from 'react-icons/ai';
 
@@ -61,7 +62,8 @@ const SeventhSection = () => {
             </div>
             <div className='flex justify-center'>
                 <button className="bg-[#4E89E1] lg:mt-16 md:mt-8 mt-5 rounded-md px-12 lg:py-3 py-2 text-white font-semibold">
-                    READ MORE TESTIMONIALS
+                <Link href={"/testimonial"}>READ MORE TESTIMONIALS</Link>
+                    
                 </button>
             </div>
         </div>

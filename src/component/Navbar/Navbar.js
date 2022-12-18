@@ -8,16 +8,16 @@ const Navbar = () => {
                     <Link className=' lg:text-5xl md:text-4xl text-xl w-1/2' href={"/"}><span className='font-bold'>legalex</span><span className='font-normal'>box</span></Link>
                     <h1 ></h1>
                 </div>
-                <div className='flex gap-12 lg:visible invisible'>
+                <div className='flex gap-12 whitespace-nowrap'>
                     <Link href={"/about"}>About Us</Link>
                     <Link href={"/service"}>Service</Link>
                     <Link href={"/contacts"}>Contact</Link>
                 </div>
-                <div className='flex justify-end'>
+                {/* <div className='flex justify-end'>
                     <Link href={"/login"}>
-                        <h3 className='bg-blue-700 py-3 px-16 rounded-md'>Client Login</h3>
+                        <h3 className='bg-blue-700 lg:py-3 py-2 lg:px-16 px-8 pt-2 rounded-md whitespace-nowrap'>Client Login</h3>
                     </Link>
-                </div>
+                </div> */}
             </div>
     );
 };
