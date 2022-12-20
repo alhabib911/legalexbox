@@ -23,10 +23,11 @@ const Footer = () => {
             <div className='flex justify-between lg:w-2/5 w-full'>
                 <div className='w-1/2'>
                     <h2 className='text-white font-semibold text-xl'>Quick Links</h2>
-                    <p className='text-gray-400 text-lg pt-8'>About Us</p>
-                    <p className='text-gray-400 text-lg pt-2'>Testimonials</p>
-                    <p className='text-gray-400 text-lg pt-2'>Review</p>
-                    <p className='text-gray-400 text-lg pt-2'>Contact</p>
+                    <div className='mt-10'>
+                        <Link className='text-gray-400 text-lg mt-8' href={'/about'}>About Us</Link> <br />
+                        <Link className='text-gray-400 text-lg mt-8' href={'/testimonial'}>Testimonials</Link> <br />
+                        <Link className='text-gray-400 text-lg mt-8' href={'/contacts'}>Contact</Link>
+                    </div>
                 </div>
                 <div className='w-1/2'>
                     <h2 className='text-white font-semibold text-xl'>Contact Us</h2>
@@ -42,7 +43,7 @@ const Footer = () => {
                     <BsTwitter />
                     <FaLinkedinIn />
                 </div>
-            <p className='text-white pt-8 pb-16 text-center lg:invisible md:visible visible'>© 2001-2022 legalexbox, Inc. All rights reserved. | Privacy Policy</p>
+                <p className='text-white pt-8 pb-16 text-center lg:invisible md:visible visible'>© 2001-2022 legalexbox, Inc. All rights reserved. | Privacy Policy</p>
             </div>
         </div>
     );

@@ -5,6 +5,38 @@ import Footer from '../component/Footer/Footer';
 import Navbar from '../component/Navbar/Navbar';
 
 const contacts = () => {
+    const handleAddContactInfo = (e) => {
+        e.preventDefault();
+        const Name = e.target.Name.value;
+        const FirmName = e.target.FirmName.value;
+        const Email = e.target.Email.value;
+        const Phone = e.target.Phone.value;
+
+        const ContactInfo = {
+            Name,
+            FirmName,
+            Email,
+            Phone,
+        };
+        console.log(ContactInfo);
+        // fetch(
+        //     "http://localhost:3000/",
+        //     {
+        //         method: "POST",
+        //         headers: {
+        //             "content-type": "application/json",
+        //         },
+        //         body: JSON.stringify(ContactInfo),
+        //     }
+        // )
+        //     .then((res) => res.json())
+        //     .then((data) => {
+        //         console.log(data);
+        //         if (data) {
+        //             e.target.reset();
+        //         }
+        //     });
+    };
     return (
         <div className='bg-[#03142D]'>
             <Navbar />
@@ -33,18 +65,18 @@ const contacts = () => {
                 <div className='bg-[#F6FCFF] lg:w-1/2 lg:pl-16 md:pl-10 pl-5 pt-8 rounded-lg'>
                     <p className='text-xl pt-5'>indicates required fields</p>
                     <p className='text-xl pt-5'>Please note that your information is saved on our server as you enter it.</p>
-                    <div className='pt-8'>
+                    <form onSubmit={handleAddContactInfo} className='pt-8'>
                         <label className='font-semibold lg:text-xl md:text-xl text-lg' htmlFor="">Name <span className='text-red-600'>*</span></label> <br />
-                        <input className='w-11/12 mr-10 lg:py-2 md:py-2 py-1 mt-2 border-gray-700 border rounded-lg' type="text" name="name" id="" /> <br /> <br />
+                        <input className='w-11/12 pl-2 mr-10 lg:py-2 md:py-2 py-1 mt-2 border-gray-700 border rounded-lg' type="text" name="Name" id="" /> <br /> <br />
                         <label className='font-semibold lg:text-xl md:text-xl text-lg' htmlFor="">Firm Name <span className='text-red-600'>*</span></label> <br />
-                        <input className='w-11/12 mr-10 lg:py-2 md:py-2 py-1 mt-2 border-gray-700 border rounded-lg' type="text" name="name" id="" /> <br /> <br />
+                        <input className='w-11/12 pl-2 mr-10 lg:py-2 md:py-2 py-1 mt-2 border-gray-700 border rounded-lg' type="text" name="FirmName" id="" /> <br /> <br />
                         <label className='font-semibold lg:text-xl md:text-xl text-lg' htmlFor="">Email Address <span className='text-red-600'>*</span></label> <br />
-                        <input className='w-11/12 mr-10 lg:py-2 md:py-2 py-1 mt-2 border-gray-700 border rounded-lg' type="text" name="name" id="" /> <br /> <br />
+                        <input className='w-11/12 pl-2 mr-10 lg:py-2 md:py-2 py-1 mt-2 border-gray-700 border rounded-lg' type="text" name="Email" id="" /> <br /> <br />
                         <label className='font-semibold lg:text-xl md:text-xl text-lg' htmlFor="">Phone Number <span className='text-red-600'>*</span></label> <br />
-                        <input className='w-11/12 mr-10 lg:py-2 md:py-2 py-1 mt-2 border-gray-700 border rounded-lg' type="text" name="name" id="" /> <br /> <br />
-                        <input className='bg-[#3B65A0] lg:py-2 md:py-2 py-1 px-8 mb-10 text-white font-semibold rounded-md' type="submit" value="Let's Go" />
+                        <input className='w-11/12 pl-2 mr-10 lg:py-2 md:py-2 py-1 mt-2 border-gray-700 border rounded-lg' type="text" name="Phone" id="" /> <br /> <br />
+                        <input className='bg-[#3B65A0] lg:py-2 md:py-2 py-1 px-8 mb-10 cursor-pointer text-white font-semibold rounded-md' type="submit" value="Let's Go" />
 
-                    </div>
+                    </form>
                 </div>
             </div>
 
