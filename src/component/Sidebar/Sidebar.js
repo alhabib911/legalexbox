@@ -102,7 +102,7 @@ export default function Sidebar() {
                                     </li>
                                     <li className="rounded-sm">
                                         <Link
-                                            href="/admin-dashboard/client"
+                                            href="/admin-dashboard/contact-list"
                                             className="flex items-center p-2 space-x-3 rounded-md"
                                         >
                                             <svg
@@ -119,7 +119,7 @@ export default function Sidebar() {
                                                     d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
                                                 />
                                             </svg>
-                                            <span>Client</span>
+                                            <span>Contact List</span>
                                         </Link>
                                     </li>
                                 </ul>
