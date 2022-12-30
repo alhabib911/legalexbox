@@ -1,43 +1,77 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 import {
   fileToDataUri,
+  SingleFileUpload,
   uploadFile,
 } from "../../component/common/ImageProccess";
+import OverlayLoading from "../../component/common/OverlayLoading";
 import Layout from "../../component/Layout/Layout";
 
 const myTeam = () => {
   const [showModal, setShowModal] = useState(false);
+  const [loading, setLoading] = useState(false);
   const {
     handleSubmit,
     register,
     formState: { errors, isValid },
     watch,
-    reset
+    reset,
   } = useForm({ mode: "all" });
   const [profileURL, setProfileURL] = useState("");
   const [profileFile, setProfileFile] = useState("");
-  const handleUploadProfileChange = (file) => {
+  const handleUploadProfileChange = async (file) => {
     if (!file) {
       setProfileURL("");
-      //   setBtnTrue(false);
       return;
     }
     setProfileFile(file);
     fileToDataUri(file).then((profileURL) => {
       setProfileURL(profileURL);
       // uploadFile(profileURL);
-      //   setBtnTrue(true);
     });
+
+    // const imgref = `teams/profile`;
+    // const get_url = await SingleFileUpload(
+    //   profileFile,
+    //   imgref,
+    //   "update-profile-pic"
+    // );
+    // console.log('after upload', get_url)
   };
   const onSubmit = async (value) => {
-    //  await handler(data)
-    const { data } = await axios.get("http://localhost:3003/api/teams");
-    console.log('data', data)
-    reset()
-    
+    setLoading(true);
+    const { data } = await axios.post(
+      `http://${window.location.host}/api/teams`,
+      value
+    );
+    if (data.status === 200) {
+      Swal.fire({
+        title: "Successfully created team.",
+        icon: "success",
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 1000
+      });
+      setLoading(false);
+    }else{
+      Swal.fire({
+        text: `"Something went wrong! Please try again later.`,
+        icon: "warning",
+        confirmButtonColor: "#006EB8",
+        confirmButtonText: `Ok`,
+        allowOutsideClick: false,
+      });
+      setLoading(false);
+    }
+    reset();
+    setShowModal(false)
   };
+  if (loading) {
+    return <OverlayLoading />;
+  }
   return (
     <Layout>
       <div className="px-5">
@@ -119,7 +153,7 @@ const myTeam = () => {
                               id="first-name"
                               type="text"
                               placeholder="Jane"
-                              {...register("first-name", { required: true })}
+                              {...register("first_name", { required: true })}
                             />
                           </div>
                           <div className="w-full md:w-1/2 px-3">
@@ -134,7 +168,7 @@ const myTeam = () => {
                               id="last-name"
                               type="text"
                               placeholder="Doe"
-                              {...register("last-name", { required: true })}
+                              {...register("last_name", { required: true })}
                             />
                           </div>
                         </div>

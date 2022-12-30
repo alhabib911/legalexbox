@@ -1,7 +1,8 @@
 import React from 'react';
 import Footer from '../component/Footer/Footer';
 import Navbar from '../component/Navbar/Navbar';
-import TeamCard from './TeamCard';
+import TeamCard from '../component/TeamCard';
+
 
 const team = () => {
     const teamadd = [
@@ -31,9 +32,9 @@ const team = () => {
                 <h1 className='lg:text-5xl md:text-3xl text-xl text-center text-white font-semibold'>Meet Our Team</h1>
                 <h3 className='lg:text-3xl md:text-2xl text-lg text-center text-white pt-2'>It’s our job to make you look great.</h3>
                 <div className='grid lg:grid-cols-3 md:grid-cols-3 grid-cols-1 pt-16 lg:mx-28 md:mx-20 mx-10 gap-10'>
-                        {/* {teamadd.map(teamadd => (
+                        {teamadd.map(teamadd => (
                             <TeamCard team={teamadd}/>
-                        ))} */}
+                        ))}
                     </div>
             </div>
             <Footer />

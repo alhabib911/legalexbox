@@ -6,7 +6,9 @@ import Layout from '../../component/Layout/Layout';
 const Dashboard = () => {
     const [open, setOpen] = useState(false);
     return (
-        <Layout/>
+        <Layout>
+            <p>Hi Dashboard...</p>
+        </Layout>
     );
 };
 

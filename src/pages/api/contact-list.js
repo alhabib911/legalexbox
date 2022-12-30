@@ -1,5 +1,3 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-
 import clientPromise from "./db/db";
 
 export default async function handler(req, res) {
@@ -8,15 +6,15 @@ export default async function handler(req, res) {
   if (req.method === "POST") {
     // Process a POST request
     try {
-      const insertTeamMember = await db.collection("teams").insert(req.body);
-      res.json({ status: 200, data: insertTeamMember });
+      const insertContact = await db.collection("contact-lists").insert(req.body);
+      res.json({ status: 200, data: insertContact });
     } catch (error) {
       res.json({ status: 400, data: error });
     }
   } else {
     try {
-      const allTeams = await db.collection("teams").find({}).toArray();
-      res.json({ status: 200, data: allTeams });
+      const allContactLists = await db.collection("contact-lists").find({}).toArray();
+      res.json({ status: 200, data: allContactLists });
     } catch (error) {
       res.json({ status: 400, data: error });
     }

@@ -1,7 +1,7 @@
 import React from 'react';
 import Footer from '../component/Footer/Footer';
 import Navbar from '../component/Navbar/Navbar';
-import TestimonialAddedCard from './TestimonialAddedCard';
+import TestimonialAddedCard from '../component/TestimonialAddedCard';
 
 const testimonial = () => {
     const testimonialAdded = [
@@ -35,9 +35,9 @@ const testimonial = () => {
             <Navbar />
             <h1 className='lg:text-4xl text-2xl text-center font-bold text-white pt-5'>Our Amazing Clients</h1>
             <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 pt-16 lg:mx-28 md:mx-20 mx-10 gap-10'>
-                {/* {testimonialAdded.map(testimonialAdded => (
-                    <TestimonialAddedCard testimonial={testimonialAdded}></TestimonialAddedCard>
-                ))} */}
+                {testimonialAdded.map(testimonialAdded => (
+                    <TestimonialAddedCard testimonial={testimonialAdded} />
+                ))}
             </div>
             <Footer />
         </div>
