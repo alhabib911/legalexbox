@@ -30,22 +30,15 @@ const myTeam = () => {
     setProfileFile(file);
     fileToDataUri(file).then((profileURL) => {
       setProfileURL(profileURL);
-      // uploadFile(profileURL);
     });
-
-    // const imgref = `teams/profile`;
-    // const get_url = await SingleFileUpload(
-    //   profileFile,
-    //   imgref,
-    //   "update-profile-pic"
-    // );
-    // console.log('after upload', get_url)
   };
+
   const onSubmit = async (value) => {
     setLoading(true);
+    const image_url = await uploadFile(profileFile);
     const { data } = await axios.post(
       `http://${window.location.host}/api/teams`,
-      value
+      {...value, image: image_url}
     );
     if (data.status === 200) {
       Swal.fire({
