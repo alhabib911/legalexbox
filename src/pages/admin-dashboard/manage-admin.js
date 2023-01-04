@@ -3,14 +3,15 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import OverlayLoading from "../../component/common/OverlayLoading";
+import { createUserWithEmail } from "../../component/context/auth";
 import Layout from "../../component/Layout/Layout";
 import Table from "../../component/table/Table";
 
-const review = () => {
+const AdminList = () => {
   const [showModal, setShowModal] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
-  const [reload, setReload] = useState(false)
+  const [loading, setLoading] = useState(false);
+  const [reload, setReload] = useState(false);
   const {
     handleSubmit,
     register,
@@ -19,104 +20,131 @@ const review = () => {
     reset,
   } = useForm({ mode: "all" });
 
-  const onSubmit = async (value) => {
-    setLoading(true);
-    const { data } = await axios.post(
-      `http://${window.location.host}/api/reviews`,
-      value
-    );
-    if (data.status === 200) {
-      setReload(Date.now())
-      Swal.fire({
-        title: "Successfully Added review.",
-        icon: "success",
-        showConfirmButton: false,
-        timerProgressBar: true,
-        timer: 1000,
-      });
-      setLoading(false);
-    } else {
-      Swal.fire({
-        text: `"Something went wrong! Please try again later.`,
-        icon: "warning",
-        confirmButtonColor: "#006EB8",
-        confirmButtonText: `Ok`,
-        allowOutsideClick: false,
-      });
-      setLoading(false);
-    }
-    reset();
-    setShowModal(false);
-  };
-
   useEffect(() => {
     async function fetch() {
       setLoading(true);
       const { data } = await axios.get(
-        `http://${window.location.host}/api/reviews`
+        `http://${window.location.host}/api/admins`
       );
       if (data.status === 200) {
         setData(data.data);
         setLoading(false);
       }
-      setLoading(false);
     }
+    setLoading(false);
     fetch();
   }, [reload]);
 
   const columns = React.useMemo(
     () => [
       {
-        Header: "Profile",
-        accessor: "#",
-        Cell: ({ row }) => (
-          <div className="py-2">
-            <img
-              className="w-[60px] h-[60px] rounded-full"
-              src={row.original.image}
-              alt=""
-            />
-          </div>
-        ),
-      },
-      {
-        Header: "Company Name",
-        accessor: "company_name",
-      },
-      {
-        Header: "Details",
-        accessor: "details",
-      },
-      {
         Header: "Email",
         accessor: "email",
       },
       {
-        Header: "Designation",
-        accessor: "designation",
+        Header: "Role",
+        accessor: "role",
+      },
+      {
+        Header: "Created",
+        accessor: "#",
+        Cell: ({ row }) => {
+          return (
+            <div>
+              {new Date(
+                Number(row.original.created || Date.now())
+              ).toLocaleString()}
+            </div>
+          );
+        },
+      },
+      {
+        Header: "Action",
+        accessor: "#a",
+        Cell: ({ row }) => {
+          return (
+            <div>
+              <button
+                onClick={() => handleDelete(row.original.email)}
+                type="button"
+                className="btn btn-primary bg-[#fe1e35] px-2 rounded-md text-white"
+              >
+                Deleted Admin
+              </button>
+            </div>
+          );
+        },
       },
     ],
     []
   );
+  const handleDelete = async (email) => {
+    let r = confirm("Are you sure delete this admin.");
+    if (!r) {
+      return;
+    }
+    setLoading(true);
+    const { data } = await axios.delete(
+      `http://${window.location.host}/api/admins`,
+      { data: email }
+    );
+    if (data.status === 200) {
+      setReload(Date.now());
+    } else {
+      Swal.fire({
+        title: "Something went wrong",
+        icon: "error",
+        timer: 2000,
+        showConfirmButton: true,
+        confirmButtonText: "Okay",
+      });
+    }
+    setLoading(true);
+  };
+  const onSubmit = async (data) => {
+    setShowModal(false);
+    setLoading(true);
+    const user = await createUserWithEmail(data.email, data.password);
+    if (user) {
+      const userData = {
+        email: user?.user?.email,
+        role: "admin",
+        created: user?.user?.metadata?.createdAt,
+      };
+      await axios.post(`http://${window.location.host}/api/admins`, {
+        ...userData,
+      });
+      setLoading(false);
+      setReload(Date.now());
+      Swal.fire({
+        title: "Successfully created admin.",
+        icon: "success",
+        timer: 2000,
+        showConfirmButton: true,
+        confirmButtonText: "Okay",
+      });
+    } else {
+      setLoading(false);
+      return false;
+    }
+  };
 
   return (
     <Layout>
-      <div className="px-5"></div>
-      <div>
-        <div className="px-2">
-          <button
-            className="bg-[#3B65A0] lg:py-2 mt-4 md:py-2 py-1 px-8 mb-10 cursor-pointer text-white font-semibold rounded-md block"
-            onClick={() => setShowModal(true)}
-          >
-            Add Review
-          </button>
-        </div>
+      <div className="px-2">
+        <button
+          className="bg-[#3B65A0] lg:py-2 mt-4 md:py-2 py-1 px-8 mb-2 cursor-pointer text-white font-semibold rounded-md block"
+          onClick={() => setShowModal(true)}
+        >
+          Create Admin
+        </button>
         {loading ? (
           <OverlayLoading />
         ) : (
           <Table columns={columns} data={data} loading={loading} />
         )}
       </div>
+
       <>
         {showModal ? (
           <>
@@ -145,33 +173,31 @@ const review = () => {
                           <div className="w-full px-3">
                             <label
                               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              htmlFor="company-name"
+                              htmlFor="email"
                             >
-                              Company Name{" "}
-                              <span className="text-red-600">*</span>
+                              Email <span className="text-red-600">*</span>
                             </label>
                             <input
                               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="company-name"
-                              type="text"
-                              placeholder="Company name"
-                              {...register("company_name", { required: true })}
+                              id="email"
+                              type="email"
+                              placeholder="Email Name"
+                              {...register("email", { required: true })}
                             />
                           </div>
                           <div className="w-full px-3">
                             <label
                               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              htmlFor="review-details"
+                              htmlFor="password"
                             >
-                              Review Details{" "}
-                              <span className="text-red-600">*</span>
+                              Password <span className="text-red-600">*</span>
                             </label>
                             <textarea
                               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="review-details"
+                              id="password"
                               type="text"
-                              placeholder="Enter review details"
-                              {...register("review_details", {
+                              placeholder="Enter password"
+                              {...register("password", {
                                 required: true,
                               })}
                             />
@@ -209,4 +235,4 @@ const review = () => {
   );
 };
 
-export default review;
+export default AdminList;

@@ -13,11 +13,11 @@ const Navbar = () => {
                     <Link href={"/service"}>Service</Link>
                     <Link href={"/contacts"}>Contact</Link>
                 </div>
-                {/* <div className='flex justify-end'>
+                <div className='flex justify-end'>
                     <Link href={"/login"}>
-                        <h3 className='bg-blue-700 lg:py-3 py-2 lg:px-16 px-8 pt-2 rounded-md whitespace-nowrap'>Client Login</h3>
+                        <h3 className='bg-blue-700 lg:py-3 py-2 lg:px-16 px-8 pt-2 rounded-md whitespace-nowrap'>Login</h3>
                     </Link>
-                </div> */}
+                </div>
             </div>
     );
 };

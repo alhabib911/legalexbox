@@ -1,6 +1,8 @@
+import { signOut } from "firebase/auth";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
+import { fbAuth } from "../context/config";
 
 export default function Sidebar() {
   const [open, setOpen] = useState(true);
@@ -145,6 +147,51 @@ export default function Sidebar() {
                     </svg>
                     <span>Contact List</span>
                   </Link>
+                </li>
+                <li className="rounded-sm">
+                  <Link
+                    href="/admin-dashboard/manage-admin"
+                    className={`${router.pathname === '/admin-dashboard/manage-admin' && "bg-green-400"} flex items-center p-2 space-x-3 rounded-md`}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="w-6 h-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                      />
+                    </svg>
+                    <span>Manage Admin</span>
+                  </Link>
+                </li>
+                <li className="rounded-sm">
+                  <button
+                    // href="/admin-dashboard/manage-admin"
+                    onClick={() =>signOut(fbAuth)}
+                    className={`flex items-center p-2 space-x-3 rounded-md`}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="w-6 h-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                      />
+                    </svg>
+                    <span>Sign Out</span>
+                  </button>
                 </li>
               </ul>
             </div>

@@ -14,7 +14,8 @@ import Table from "../../component/table/Table";
 const myTeam = () => {
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState([])
+  const [data, setData] = useState([]);
+  const [reload, setReload] = useState(false)
   const {
     handleSubmit,
     register,
@@ -43,12 +44,13 @@ const myTeam = () => {
       { ...value, image: image_url }
     );
     if (data.status === 200) {
+      setReload(Date.now())
       Swal.fire({
         title: "Successfully created team.",
         icon: "success",
         showConfirmButton: false,
         timerProgressBar: true,
-        timer: 1000
+        timer: 1000,
       });
       setLoading(false);
     } else {
@@ -62,21 +64,23 @@ const myTeam = () => {
       setLoading(false);
     }
     reset();
-    setShowModal(false)
+    setShowModal(false);
   };
 
   useEffect(() => {
     async function fetch() {
-      setLoading(true)
-      const { data } = await axios.get(`http://${window.location.host}/api/teams`)
+      setLoading(true);
+      const { data } = await axios.get(
+        `http://${window.location.host}/api/teams`
+      );
       if (data.status === 200) {
-        setData(data.data)
-        setLoading(false)
+        setData(data.data);
+        setLoading(false);
       }
-      setLoading(false)
+      setLoading(false);
     }
-    fetch()
-  }, [])
+    fetch();
+  }, [reload]);
 
   const columns = React.useMemo(
     () => [
@@ -84,8 +88,12 @@ const myTeam = () => {
         Header: "Profile",
         accessor: "#",
         Cell: ({ row }) => (
-          <div className='py-2'>
-            <img className='w-[60px] h-[60px] rounded-full' src={row.original.image} alt="" />
+          <div className="py-2">
+            <img
+              className="w-[60px] h-[60px] rounded-full"
+              src={row.original.image}
+              alt=""
+            />
           </div>
         ),
       },
@@ -108,9 +116,7 @@ const myTeam = () => {
     ],
     []
   );
-  if (loading) {
-    return <OverlayLoading />;
-  }
+
   return (
     <Layout>
       <div>
@@ -122,11 +128,11 @@ const myTeam = () => {
             Add Team
           </button>
         </div>
-        <Table
-          columns={columns}
-          data={data}
-          loading={loading}
-        />
+        {loading ? (
+          <OverlayLoading />
+        ) : (
+          <Table columns={columns} data={data} loading={loading} />
+        )}
       </div>
       <>
         {showModal ? (
@@ -268,7 +274,7 @@ const myTeam = () => {
                       <button
                         className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                         type="submit"
-                      // onClick={() => setShowModal(false)}
+                        // onClick={() => setShowModal(false)}
                       >
                         Submit
                       </button>

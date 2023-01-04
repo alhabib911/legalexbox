@@ -11,18 +11,17 @@ const contactList = () => {
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     async function fetch() {
-      setLoading(true)
+      setLoading(true);
       const { data } = await axios.get(
         `http://${window.location.host}/api/contact-list`
       );
       if (data.status === 200) {
-        setData(data.data)
-        setLoading(false)
+        setData(data.data);
+        setLoading(false);
       }
-
     }
-    setLoading(false)
-    fetch()
+    setLoading(false);
+    fetch();
   }, []);
 
   const columns = React.useMemo(
@@ -45,20 +44,19 @@ const contactList = () => {
       },
     ],
     []
-  ); 
-  
-  if (loading) {
-    return <OverlayLoading />;
-  }
+  );
+
   return (
     <Layout>
-      <p className="text-center text-gray-800 text-2xl font-bold pt-2 underline">Contact List</p>
+      <p className="text-center text-gray-800 text-2xl font-bold pt-2 underline">
+        Contact List
+      </p>
       <div>
-        <Table
-          columns={columns}
-          data={data}
-          loading={loading}
-        />
+        {loading ? (
+          <OverlayLoading />
+        ) : (
+          <Table columns={columns} data={data} loading={loading} />
+        )}
       </div>
     </Layout>
   );
