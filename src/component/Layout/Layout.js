@@ -1,13 +1,13 @@
 import React from 'react';
 import Sidebar from '../Sidebar/Sidebar';
 
-const Layout = ({children}) => {
+const Layout = ({ children }) => {
     return (
         <div className='flex'>
-            <Sidebar/>
-            {
+            <Sidebar />
+            <div className='flex-1 px-3'>{
                 children
-            }
+            }</div>
         </div>
     );
 };

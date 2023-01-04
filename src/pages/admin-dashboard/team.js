@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import {
@@ -9,10 +9,12 @@ import {
 } from "../../component/common/ImageProccess";
 import OverlayLoading from "../../component/common/OverlayLoading";
 import Layout from "../../component/Layout/Layout";
+import Table from "../../component/table/Table";
 
 const myTeam = () => {
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [data, setData] = useState([])
   const {
     handleSubmit,
     register,
@@ -38,7 +40,7 @@ const myTeam = () => {
     const image_url = await uploadFile(profileFile);
     const { data } = await axios.post(
       `http://${window.location.host}/api/teams`,
-      {...value, image: image_url}
+      { ...value, image: image_url }
     );
     if (data.status === 200) {
       Swal.fire({
@@ -49,7 +51,7 @@ const myTeam = () => {
         timer: 1000
       });
       setLoading(false);
-    }else{
+    } else {
       Swal.fire({
         text: `"Something went wrong! Please try again later.`,
         icon: "warning",
@@ -62,18 +64,69 @@ const myTeam = () => {
     reset();
     setShowModal(false)
   };
+
+  useEffect(() => {
+    async function fetch() {
+      setLoading(true)
+      const { data } = await axios.get(`http://${window.location.host}/api/teams`)
+      if (data.status === 200) {
+        setData(data.data)
+        setLoading(false)
+      }
+      setLoading(false)
+    }
+    fetch()
+  }, [])
+
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: "Profile",
+        accessor: "#",
+        Cell: ({ row }) => (
+          <div className='py-2'>
+            <img className='w-[60px] h-[60px] rounded-full' src={row.original.image} alt="" />
+          </div>
+        ),
+      },
+      {
+        Header: "First Name",
+        accessor: "first_name",
+      },
+      {
+        Header: "Last Name",
+        accessor: "last_name",
+      },
+      {
+        Header: "Email",
+        accessor: "email",
+      },
+      {
+        Header: "Designation",
+        accessor: "designation",
+      },
+    ],
+    []
+  );
   if (loading) {
     return <OverlayLoading />;
   }
   return (
     <Layout>
-      <div className="px-5">
-        <button
-          className="bg-[#3B65A0] lg:py-2 mt-4 md:py-2 py-1 px-8 mb-10 cursor-pointer text-white font-semibold rounded-md block"
-          onClick={() => setShowModal(true)}
-        >
-          Add Team
-        </button>
+      <div>
+        <div className="px-2">
+          <button
+            className="bg-[#3B65A0] lg:py-2 mt-4 md:py-2 py-1 px-8 mb-3 cursor-pointer text-white font-semibold rounded-md"
+            onClick={() => setShowModal(true)}
+          >
+            Add Team
+          </button>
+        </div>
+        <Table
+          columns={columns}
+          data={data}
+          loading={loading}
+        />
       </div>
       <>
         {showModal ? (
@@ -215,7 +268,7 @@ const myTeam = () => {
                       <button
                         className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                         type="submit"
-                        // onClick={() => setShowModal(false)}
+                      // onClick={() => setShowModal(false)}
                       >
                         Submit
                       </button>

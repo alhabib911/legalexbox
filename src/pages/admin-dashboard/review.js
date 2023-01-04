@@ -1,13 +1,15 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import OverlayLoading from "../../component/common/OverlayLoading";
 import Layout from "../../component/Layout/Layout";
+import Table from "../../component/table/Table";
 
 const review = () => {
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [data, setData] = useState([])
   const {
     handleSubmit,
     register,
@@ -44,18 +46,72 @@ const review = () => {
     reset();
     setShowModal(false);
   };
+
+  useEffect(() => {
+    async function fetch() {
+      setLoading(true)
+      const { data } = await axios.get(`http://${window.location.host}/api/reviews`)
+      if (data.status === 200) {
+        setData(data.data)
+        setLoading(false)
+      }
+      setLoading(false)
+    }
+    fetch()
+  }, [])
+
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: "Profile",
+        accessor: "#",
+        Cell: ({ row }) => (
+          <div className='py-2'>
+            <img className='w-[60px] h-[60px] rounded-full' src={row.original.image} alt="" />
+          </div>
+        ),
+      },
+      {
+        Header: "Company Name",
+        accessor: "company_name",
+      },
+      {
+        Header: "Details",
+        accessor: "details",
+      },
+      {
+        Header: "Email",
+        accessor: "email",
+      },
+      {
+        Header: "Designation",
+        accessor: "designation",
+      },
+    ],
+    []
+  );
   if (loading) {
     return <OverlayLoading />;
   }
   return (
     <Layout>
       <div className="px-5">
+        
+      </div>
+      <div>
+        <div className="px-2">
         <button
           className="bg-[#3B65A0] lg:py-2 mt-4 md:py-2 py-1 px-8 mb-10 cursor-pointer text-white font-semibold rounded-md block"
           onClick={() => setShowModal(true)}
         >
           Add Review
         </button>
+        </div>
+        <Table
+          columns={columns}
+          data={data}
+          loading={loading}
+        />
       </div>
       <>
         {showModal ? (

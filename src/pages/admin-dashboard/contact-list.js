@@ -1,155 +1,64 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import OverlayLoading from "../../component/common/OverlayLoading";
 import Layout from "../../component/Layout/Layout";
+import Table from "../../component/table/Table";
 
 const contactList = () => {
   const [showModal, setShowModal] = useState(false);
   const [data, setData] = useState([]);
-
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     async function fetch() {
+      setLoading(true)
       const { data } = await axios.get(
         `http://${window.location.host}/api/contact-list`
       );
-      setData(data)
+      if (data.status === 200) {
+        setData(data.data)
+        setLoading(false)
+      }
+
     }
+    setLoading(false)
     fetch()
   }, []);
-console.log('result', data)
 
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: "Name",
+        accessor: "name",
+      },
+      {
+        Header: "Firm Name",
+        accessor: "firmName",
+      },
+      {
+        Header: "Email",
+        accessor: "email",
+      },
+      {
+        Header: "Phone",
+        accessor: "phone",
+      },
+    ],
+    []
+  ); 
+  
+  if (loading) {
+    return <OverlayLoading />;
+  }
   return (
     <Layout>
-      <div className="px-5 py-5">
-        <p className="font-bold text-lg">Contact Lists</p>
-        <div className="flex flex-col">
-          <div className="overflow-x-auto">
-            <div className="p-1.5 w-full inline-block align-middle">
-              <div className="overflow-hidden border rounded-lg">
-                <table className="min-w-full divide-y divide-gray-200">
-                  <thead className="bg-gray-50">
-                    <tr>
-                      <th scope="col" className="py-3 pl-4">
-                        <div className="flex items-center h-5">
-                          <input
-                            id="checkbox-all"
-                            type="checkbox"
-                            className="text-blue-600 border-gray-200 rounded focus:ring-blue-500"
-                          />
-                          <label htmlFor="checkbox" className="sr-only">
-                            Checkbox
-                          </label>
-                        </div>
-                      </th>
-                      <th
-                        scope="col"
-                        className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
-                      >
-                        ID
-                      </th>
-                      <th
-                        scope="col"
-                        className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
-                      >
-                        Name
-                      </th>
-                      <th
-                        scope="col"
-                        className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
-                      >
-                        Email
-                      </th>
-                      <th
-                        scope="col"
-                        className="px-6 py-3 text-xs font-bold text-right text-gray-500 uppercase "
-                      >
-                        Edit
-                      </th>
-                      <th
-                        scope="col"
-                        className="px-6 py-3 text-xs font-bold text-right text-gray-500 uppercase "
-                      >
-                        Delete
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gray-200">
-                    <tr>
-                      <td className="py-3 pl-4">
-                        <div className="flex items-center h-5">
-                          <input
-                            type="checkbox"
-                            className="text-blue-600 border-gray-200 rounded focus:ring-blue-500"
-                          />
-                          <label htmlFor="checkbox" className="sr-only">
-                            Checkbox
-                          </label>
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap">
-                        1
-                      </td>
-                      <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
-                        Jone Doe
-                      </td>
-                      <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
-                        jonne62@gmail.com
-                      </td>
-                      <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                        <a
-                          className="text-green-500 hover:text-green-700"
-                          href="#"
-                        >
-                          Edit
-                        </a>
-                      </td>
-                      <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                        <a className="text-red-500 hover:text-red-700" href="#">
-                          Delete
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="py-3 pl-4">
-                        <div className="flex items-center h-5">
-                          <input
-                            type="checkbox"
-                            className="text-blue-600 border-gray-200 rounded focus:ring-blue-500"
-                          />
-                          <label htmlFor="checkbox" className="sr-only">
-                            Checkbox
-                          </label>
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap">
-                        1
-                      </td>
-                      <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
-                        Jone Doe
-                      </td>
-                      <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
-                        jonne62@gmail.com
-                      </td>
-                      <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                        <a
-                          className="text-green-500 hover:text-green-700"
-                          href="#"
-                        >
-                          Edit
-                        </a>
-                      </td>
-                      <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                        <a className="text-red-500 hover:text-red-700" href="#">
-                          Delete
-                        </a>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
+      <p className="text-center text-gray-800 text-2xl font-bold pt-2 underline">Contact List</p>
+      <div>
+        <Table
+          columns={columns}
+          data={data}
+          loading={loading}
+        />
       </div>
     </Layout>
   );
