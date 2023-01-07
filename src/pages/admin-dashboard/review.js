@@ -23,7 +23,7 @@ const review = () => {
   const onSubmit = async (value) => {
     setLoading(true);
     const { data } = await axios.post(
-      `http://${window.location.host}/api/reviews`,
+      `https://${window.location.host}/api/reviews`,
       {...value, rating: rate}
     );
     if (data.status === 200) {
@@ -56,7 +56,7 @@ const review = () => {
     async function fetch() {
       setLoading(true);
       const { data } = await axios.get(
-        `http://${window.location.host}/api/reviews`
+        `https://${window.location.host}/api/reviews`
       );
       if (data.status === 200) {
         setData(data.data);

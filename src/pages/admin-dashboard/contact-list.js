@@ -13,7 +13,7 @@ const contactList = () => {
     async function fetch() {
       setLoading(true);
       const { data } = await axios.get(
-        `http://${window.location.host}/api/contact-list`
+        `https://${window.location.host}/api/contact-list`
       );
       if (data.status === 200) {
         setData(data.data);

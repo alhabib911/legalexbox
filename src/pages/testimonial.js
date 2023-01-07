@@ -38,7 +38,7 @@ const testimonial = () => {
         async function fetch() {
           setLoading(true);
           const { data } = await axios.get(
-            `http://${window.location.host}/api/reviews`
+            `https://${window.location.host}/api/reviews`
           );
           if (data.status === 200) {
             setData(data.data);

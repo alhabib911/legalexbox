@@ -16,7 +16,7 @@ const contacts = () => {
   const onSubmit = async (value) =>{
     setLoading(true);
     const { data } = await axios.post(
-      `http://${window.location.host}/api/contact-list`,
+      `https://${window.location.host}/api/contact-list`,
       value
     );
     if (data.status === 200) {

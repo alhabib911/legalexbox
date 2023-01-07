@@ -24,7 +24,7 @@ const AdminList = () => {
     async function fetch() {
       setLoading(true);
       const { data } = await axios.get(
-        `http://${window.location.host}/api/admins`
+        `https://${window.location.host}/api/admins`
       );
       if (data.status === 200) {
         setData(data.data);
@@ -85,7 +85,7 @@ const AdminList = () => {
     }
     setLoading(true);
     const { data } = await axios.delete(
-      `http://${window.location.host}/api/admins`,
+      `https://${window.location.host}/api/admins`,
       { data: email }
     );
     if (data.status === 200) {
@@ -111,7 +111,7 @@ const AdminList = () => {
         role: "admin",
         created: user?.user?.metadata?.createdAt,
       };
-      await axios.post(`http://${window.location.host}/api/admins`, {
+      await axios.post(`https://${window.location.host}/api/admins`, {
         ...userData,
       });
       setLoading(false);
