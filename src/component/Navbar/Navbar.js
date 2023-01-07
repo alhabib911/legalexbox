@@ -8,7 +8,7 @@ const Navbar = () => {
                     <Link className=' lg:text-5xl md:text-4xl text-xl w-1/2' href={"/"}><span className='font-bold'>legalex</span><span className='font-normal'>box</span></Link>
                     <h1 ></h1>
                 </div>
-                <div className='flex gap-12 whitespace-nowrap'>
+                <div className='flex md:gap-12 whitespace-nowrap'>
                     <Link href={"/about"}>About Us</Link>
                     <Link href={"/service"}>Service</Link>
                     <Link href={"/contacts"}>Contact</Link>

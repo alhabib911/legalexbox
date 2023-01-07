@@ -5,12 +5,13 @@ import Swal from "sweetalert2";
 import OverlayLoading from "../../component/common/OverlayLoading";
 import Layout from "../../component/Layout/Layout";
 import Table from "../../component/table/Table";
-
+import { AiFillStar } from "react-icons/ai";
 const review = () => {
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
-  const [reload, setReload] = useState(false)
+  const [reload, setReload] = useState(false);
+  const [rate, setRate] = useState(null)
   const {
     handleSubmit,
     register,
@@ -23,10 +24,11 @@ const review = () => {
     setLoading(true);
     const { data } = await axios.post(
       `http://${window.location.host}/api/reviews`,
-      value
+      {...value, rating: rate}
     );
     if (data.status === 200) {
-      setReload(Date.now())
+      setReload(Date.now());
+      setRate(null)
       Swal.fire({
         title: "Successfully Added review.",
         icon: "success",
@@ -36,6 +38,8 @@ const review = () => {
       });
       setLoading(false);
     } else {
+      setRate(null)
+      setLoading(false);
       Swal.fire({
         text: `"Something went wrong! Please try again later.`,
         icon: "warning",
@@ -43,7 +47,6 @@ const review = () => {
         confirmButtonText: `Ok`,
         allowOutsideClick: false,
       });
-      setLoading(false);
     }
     reset();
     setShowModal(false);
@@ -67,33 +70,24 @@ const review = () => {
   const columns = React.useMemo(
     () => [
       {
-        Header: "Profile",
-        accessor: "#",
-        Cell: ({ row }) => (
-          <div className="py-2">
-            <img
-              className="w-[60px] h-[60px] rounded-full"
-              src={row.original.image}
-              alt=""
-            />
-          </div>
-        ),
-      },
-      {
         Header: "Company Name",
         accessor: "company_name",
       },
       {
-        Header: "Details",
-        accessor: "details",
+        Header: "Author",
+        accessor: "author",
       },
       {
-        Header: "Email",
-        accessor: "email",
+        Header: "Designation Address",
+        accessor: "designation_address",
       },
       {
-        Header: "Designation",
-        accessor: "designation",
+        Header: "Review Details",
+        accessor: "review_details",
+      },
+      {
+        Header: "Rating",
+        accessor: "rating",
       },
     ],
     []
@@ -145,14 +139,14 @@ const review = () => {
                           <div className="w-full px-3">
                             <label
                               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              htmlFor="company-name"
+                              htmlFor="company_name"
                             >
                               Company Name{" "}
                               <span className="text-red-600">*</span>
                             </label>
                             <input
                               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="company-name"
+                              id="company_name"
                               type="text"
                               placeholder="Company name"
                               {...register("company_name", { required: true })}
@@ -161,19 +155,66 @@ const review = () => {
                           <div className="w-full px-3">
                             <label
                               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              htmlFor="review-details"
+                              htmlFor="review_details"
                             >
                               Review Details{" "}
                               <span className="text-red-600">*</span>
                             </label>
                             <textarea
                               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="review-details"
+                              id="review_details"
                               type="text"
                               placeholder="Enter review details"
                               {...register("review_details", {
                                 required: true,
                               })}
+                            />
+                          </div>
+                          <div className="w-full px-3">
+                            <label
+                              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                              htmlFor="review-details"
+                            >
+                              Rating <span className="text-red-600">*</span>
+                            </label>
+                            <div className="text-[25px] flex cursor-pointer">
+                              <AiFillStar onClick={()=>setRate(1)} className={rate >= 1 && "text-[#E6C850]"}/>
+                              <AiFillStar onClick={()=>setRate(2)} className={rate >= 2 && "text-[#E6C850]"}/>
+                              <AiFillStar onClick={()=>setRate(3)} className={rate >= 3 && "text-[#E6C850]"}/>
+                              <AiFillStar onClick={()=>setRate(4)} className={rate >= 4 && "text-[#E6C850]"}/>
+                              <AiFillStar onClick={()=>setRate(5)} className={rate >= 5 && "text-[#E6C850]"}/>
+                            </div>
+                          </div>
+                          <div className="w-full px-3 mt-2">
+                            <label
+                              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                              htmlFor="author"
+                            >
+                              Author{" "}
+                              <span className="text-red-600">*</span>
+                            </label>
+                            <input
+                              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                              id="author"
+                              type="text"
+                              placeholder="Author name"
+                              {...register("author", { required: true })}
+                            />
+                          </div>
+                          <div className="w-full px-3">
+                            <label
+                              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                              htmlFor="designation_address"
+                            >
+                              Designation & Address{" "}
+                              <span className="text-red-600">*</span>
+                            </label>
+                            <input
+                              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                              id="designation_address"
+                              type="text"
+                              placeholder="Designation & Address"
+                              {...register("designation_address", { required: true })}
                             />
                           </div>
                         </div>
@@ -193,6 +234,7 @@ const review = () => {
                         className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                         type="submit"
                         // onClick={() => setShowModal(false)}
+                        disabled={rate == null || !isValid}
                       >
                         Submit
                       </button>

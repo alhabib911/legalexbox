@@ -45,6 +45,7 @@ const myTeam = () => {
     );
     if (data.status === 200) {
       setReload(Date.now())
+      setProfileURL("")
       Swal.fire({
         title: "Successfully created team.",
         icon: "success",
@@ -54,6 +55,7 @@ const myTeam = () => {
       });
       setLoading(false);
     } else {
+      setProfileURL("")
       Swal.fire({
         text: `"Something went wrong! Please try again later.`,
         icon: "warning",
@@ -90,7 +92,7 @@ const myTeam = () => {
         Cell: ({ row }) => (
           <div className="py-2">
             <img
-              className="w-[60px] h-[60px] rounded-full"
+              className="w-[60px] h-[60px] rounded-full mx-auto"
               src={row.original.image}
               alt=""
             />

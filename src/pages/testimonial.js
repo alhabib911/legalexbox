@@ -1,4 +1,5 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import Footer from '../component/Footer/Footer';
 import Navbar from '../component/Navbar/Navbar';
 import TestimonialAddedCard from '../component/TestimonialAddedCard';
@@ -30,13 +31,31 @@ const testimonial = () => {
             Position: "Ferrer Law Group, LLC"
         },
     ];
+    const [loading, setLoading] = useState(false);
+    const [data, setData] = useState([]);
+    const [reload, setReload] = useState(false)
+    useEffect(() => {
+        async function fetch() {
+          setLoading(true);
+          const { data } = await axios.get(
+            `http://${window.location.host}/api/reviews`
+          );
+          if (data.status === 200) {
+            setData(data.data);
+            setLoading(false);
+          }
+          setLoading(false);
+        }
+        fetch();
+      }, []);
+
     return (
         <div className='bg-[#03142D]'>
             <Navbar />
             <h1 className='lg:text-4xl text-2xl text-center font-bold text-white pt-5'>Our Amazing Clients</h1>
             <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 pt-16 lg:mx-28 md:mx-20 mx-10 gap-10'>
-                {testimonialAdded.map(testimonialAdded => (
-                    <TestimonialAddedCard testimonial={testimonialAdded} />
+                {data?.length > 0 && data.map((testimonialAdded, i) => (
+                    <TestimonialAddedCard testimonial={testimonialAdded} key={i}/>
                 ))}
             </div>
             <Footer />
