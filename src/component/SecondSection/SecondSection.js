@@ -19,9 +19,9 @@ const SecondSection = () => {
           Design, Complete Website Control.
         </p>
         <div>
-          <button className="bg-[#4E89E1] lg:mt-16 md:mt-8 mt-5 rounded-md px-12 py-3 text-white font-semibold">
+          {/* <button className="bg-[#4E89E1] lg:mt-16 md:mt-8 mt-5 rounded-md px-12 py-3 text-white font-semibold">
             LEARN MORE
-          </button>
+          </button> */}
         </div>
       </div>
       <div className="lg:px-0 md:px-10 px-5">
